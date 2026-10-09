@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | ELO Seguro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+<main class="auth-card auth-card-wide">
+    <div class="auth-logo">E</div>
+    <h1>Criar conta</h1>
+    <p class="muted">Preencha os dados para fazer seu cadastro.</p>
+    <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-error">
+        <p th:each="erro : ${#fields.globalErrors()}" th:text="${erro}"></p>
+    </div>
+    <form th:action="@{/cadastro}" th:object="${usuario}" method="post" class="form-stack">
+        <label for="nome">Nome</label>
+        <input id="nome" type="text" th:field="*{nome}" autocomplete="name">
+        <small class="field-error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></small>
+        <label for="email">E-mail</label>
+        <input id="email" type="email" th:field="*{email}" autocomplete="email">
+        <small class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" th:field="*{senha}" autocomplete="new-password">
+        <small class="field-error" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></small>
+        <label for="confirmarSenha">Confirmar senha</label>
+        <input id="confirmarSenha" type="password" th:field="*{confirmarSenha}" autocomplete="new-password">
+        <small class="field-error" th:if="${#fields.hasErrors('confirmarSenha')}" th:errors="*{confirmarSenha}"></small>
+        <button type="submit" class="btn-primary">Cadastrar</button>
+    </form>
+    <p class="auth-footer"><a th:href="@{/login}">Voltar para o login</a></p>
+</main>
+</body>
+</html>

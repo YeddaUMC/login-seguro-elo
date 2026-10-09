@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar usuário | ELO Seguro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar"><a class="brand" th:href="@{/}"><span class="brand-mark">E</span><span>ELO Seguro</span></a><nav class="nav-links"><a th:href="@{/admin/usuarios}">Voltar</a></nav></header>
+<main class="page-container narrow">
+    <section class="panel">
+        <h1>Editar usuário</h1>
+        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-error"><p th:each="erro : ${#fields.globalErrors()}" th:text="${erro}"></p></div>
+        <form th:action="@{/admin/usuarios/{id}/editar(id=${usuarioId})}" th:object="${usuario}" method="post" class="form-stack">
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" th:field="*{nome}">
+            <small class="field-error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></small>
+            <label for="email">E-mail</label>
+            <input id="email" type="email" th:field="*{email}">
+            <small class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+            <label for="perfil">Perfil</label>
+            <select id="perfil" th:field="*{perfil}"><option th:each="perfil : ${perfis}" th:value="${perfil}" th:text="${perfil}"></option></select>
+            <label class="checkbox-row"><input type="checkbox" th:field="*{ativo}"><span>Usuário ativo</span></label>
+            <button type="submit" class="btn-primary">Salvar alterações</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

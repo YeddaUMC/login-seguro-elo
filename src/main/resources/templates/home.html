@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início | ELO Seguro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header(${usuarioLogado})}"></div>
+<main class="page-container">
+    <section class="hero-card">
+        <span class="eyebrow">Login Seguro</span>
+        <h1>Olá, <span th:text="${usuarioLogado.nome}">Usuário</span>.</h1>
+        <p>Seu acesso está autenticado com Spring Security e sua sessão fica armazenada no MongoDB.</p>
+        <div class="role-badge" th:text="${usuarioLogado.perfil}">USUARIO</div>
+    </section>
+    <section class="grid-cards">
+        <a class="feature-card" th:href="@{/perfil}">
+            <h2>Meu perfil</h2>
+            <p>Confira os dados vinculados ao seu acesso.</p>
+        </a>
+        <a class="feature-card" th:if="${usuarioLogado.perfil.name() == 'GESTOR' or usuarioLogado.perfil.name() == 'ADMIN'}" th:href="@{/gestao}">
+            <h2>Área de gestão</h2>
+            <p>Rota disponível somente para gestor e administrador.</p>
+        </a>
+        <a class="feature-card" th:if="${usuarioLogado.perfil.name() == 'ADMIN'}" th:href="@{/admin/usuarios}">
+            <h2>Controle de usuários</h2>
+            <p>Gerencie perfil, status e cadastro dos usuários.</p>
+        </a>
+    </section>
+</main>
+</body>
+</html>

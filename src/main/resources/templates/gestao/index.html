@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão | ELO Seguro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header(${usuarioLogado})}"></div>
+<main class="page-container narrow">
+    <section class="panel">
+        <span class="eyebrow">Acesso controlado</span>
+        <h1>Área de gestão</h1>
+        <p>Esta tela existe para demonstrar a autorização por perfil. Usuários com perfil USUARIO não conseguem acessar esta rota.</p>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários | ELO Seguro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/}"><span class="brand-mark">E</span><span>ELO Seguro</span></a>
+    <nav class="nav-links"><a th:href="@{/}">Início</a><form th:action="@{/logout}" method="post" class="logout-form"><button type="submit" class="link-button">Sair</button></form></nav>
+</header>
+<main class="page-container">
+    <div class="page-heading">
+        <div><span class="eyebrow">Administração</span><h1>Usuários</h1></div>
+        <a class="btn-secondary" th:href="@{/cadastro}">Novo cadastro</a>
+    </div>
+    <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+    <div th:if="${erro}" class="alert alert-error" th:text="${erro}"></div>
+    <section class="panel table-wrap">
+        <table>
+            <thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Status</th><th>Ações</th></tr></thead>
+            <tbody>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.nome}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td><span class="role-badge small" th:text="${usuario.perfil}"></span></td>
+                <td th:text="${usuario.ativo ? 'Ativo' : 'Inativo'}"></td>
+                <td class="actions">
+                    <a class="btn-small" th:href="@{/admin/usuarios/{id}/editar(id=${usuario.id})}">Editar</a>
+                    <form th:if="${usuario.email != emailLogado}" th:action="@{/admin/usuarios/{id}/excluir(id=${usuario.id})}" method="post" onsubmit="return confirm('Deseja excluir este usuário?');">
+                        <button type="submit" class="btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

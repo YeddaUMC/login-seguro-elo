@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="header(usuarioLogado)" class="topbar">
+    <a class="brand" th:href="@{/}">
+        <span class="brand-mark">E</span>
+        <span>ELO Seguro</span>
+    </a>
+    <nav class="nav-links">
+        <a th:href="@{/}">Início</a>
+        <a th:href="@{/perfil}">Meu perfil</a>
+        <a th:if="${usuarioLogado != null and (usuarioLogado.perfil.name() == 'GESTOR' or usuarioLogado.perfil.name() == 'ADMIN')}" th:href="@{/gestao}">Gestão</a>
+        <a th:if="${usuarioLogado != null and usuarioLogado.perfil.name() == 'ADMIN'}" th:href="@{/admin/usuarios}">Usuários</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="link-button">Sair</button>
+        </form>
+    </nav>
+</header>
+</body>
+</html>

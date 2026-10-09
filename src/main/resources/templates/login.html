@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | ELO Seguro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+<main class="auth-card">
+    <div class="auth-logo">E</div>
+    <h1>Bem-vindo</h1>
+    <p class="muted">Entre para acessar o sistema.</p>
+    <div th:if="${param.erro}" class="alert alert-error">E-mail ou senha inválidos, ou usuário inativo.</div>
+    <div th:if="${param.logout}" class="alert alert-success">Você saiu do sistema com segurança.</div>
+    <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+    <form th:action="@{/login}" method="post" class="form-stack">
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" autocomplete="username" required>
+        <label for="senha">Senha</label>
+        <input id="senha" name="senha" type="password" autocomplete="current-password" required>
+        <button type="submit" class="btn-primary">Entrar</button>
+    </form>
+    <p class="auth-footer">Ainda não tem acesso? <a th:href="@{/cadastro}">Criar conta</a></p>
+</main>
+</body>
+</html>
