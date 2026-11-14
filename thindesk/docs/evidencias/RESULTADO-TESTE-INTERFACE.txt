@@ -1,0 +1,12 @@
+Testes executados em Chromium com API SIMULADA em 14/11/2026.
+
+1440px dashboard: OK
+390px dashboard: OK
+Filtro por tipo: OK
+Abrir detalhes / ver notas técnicas: OK
+Abrir e enviar formulário novo chamado (mock): OK
+Páginas chamados/clientes/horários: OK
+JavaScript: node --check em 5 arquivos: OK
+
+Não foram executados Maven, Spring Boot nem MongoDB reais neste ambiente.
+Antes da entrega final, execute os testes reais no computador e acrescente capturas do resultado.
